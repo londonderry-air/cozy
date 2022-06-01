@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { SpotifyAuth } from "../../types";
+import { SpotifyAuth } from "spotify/types/auth";
+import { setCookie } from "shared/utils/cookie";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === "POST") {
-        const reqBody = JSON.parse(req.body)
+    if (req.method === "GET") {
         const url = "https://accounts.spotify.com/api/token"
         const headers = {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
         const data: ReqData = {
             grant_type: "refresh_token",
-            refresh_token: reqBody.refreshToken
+            refresh_token: req.cookies['spotify-refresh-token']
         }
 
         const params = new URLSearchParams()
@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             params.append(key, data[key as keyof ReqData])
         })
 
-        //console.log(params)
+        console.log(params)
         //console.log(headers)
 
         const result = await fetch(url, {
@@ -32,7 +32,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const auth: SpotifyAuth = {
             access_token: resData.access_token,
             expires_in: resData.expires_in,
-            refresh_token: resData.refresh_token,
+        }
+        if (auth.access_token) {
+            setCookie(res, 'spotify-access-token', auth.access_token)
         }
         res.status(200).json(auth)
     }
