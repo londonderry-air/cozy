@@ -1,31 +1,20 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import { SpotifyAuth } from '../../types'
+import { SpotifyAuth } from 'spotify/types/auth'
 
 const Home: NextPage = () => {
   const playerName = "COZY"
   const router = useRouter()
-  const [token, setToken] = useState<string | null>(null)
-  const [refreshToken, setRefreshToken] = useState<string | null>(null)
 
-  const setNewToken = async () => {
-    const url = "/api/refresh_token"
-    const data = { refreshToken }
+  const getToken = async () => {
+    const url = "/api/spotify/refresh_token"
     const res = await fetch(url, { 
-      method: "POST",
-      body: JSON.stringify(data) 
+      method: "GET",
     })
     const auth: SpotifyAuth = await res.json()
     return auth.access_token
   }
-
-  useEffect(() => {
-    const query = router.query
-    if (query.refresh) {
-      setRefreshToken(query.refresh.toString())
-    }
-  }, [router])
 
   // check token
   //useEffect(() => {
@@ -33,9 +22,6 @@ const Home: NextPage = () => {
   //}, [token])
 
   useEffect(() => {
-    if (!refreshToken) {
-      return
-    }
 
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -46,10 +32,9 @@ const Home: NextPage = () => {
       const player = new window.Spotify.Player({
         name: playerName,
         getOAuthToken: async (callback) => {
-          const newToken = await setNewToken()
+          const newToken = await getToken()
           if (newToken) {
             callback(newToken)
-            setToken(newToken)
           }
         },
         volume: 0.5,
@@ -68,7 +53,7 @@ const Home: NextPage = () => {
       player.connect()
     }
 
-  }, [refreshToken])
+  }, [])
 
   return (
     <div className='box'>

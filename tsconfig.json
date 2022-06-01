@@ -6,6 +6,11 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "spotify/*": ["./components/spotify/*"],
+      "shared/*": ["./components/shared/*"]
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,7 +22,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
   },
   "include": [
     "next-env.d.ts",
