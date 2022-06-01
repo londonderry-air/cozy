@@ -4,7 +4,8 @@ import { NextApiResponse } from "next";
 export const setCookie = (
     res: NextApiResponse,
     name: string,
-    value: unknown
+    value: unknown,
+    expires: Date
 ) => {
     const stringValue =
       typeof value === "object" ? "j:" + JSON.stringify(value) : String(value);
@@ -12,6 +13,7 @@ export const setCookie = (
     const options: CookieSerializeOptions = {
       httpOnly: true,
       secure: true,
+      expires: expires,
       path: "/",
     };
   

@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const router = useRouter()
 
   const getToken = async () => {
-    const url = "/api/spotify/refresh_token"
+    const url = "/api/spotify/auth/refresh_token"
     const res = await fetch(url, { 
       method: "GET",
     })

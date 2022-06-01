@@ -4,6 +4,7 @@ export const pallets = {
     light: <Color>{
         base: '#FFFFFF',
         main: '#131315',
+        red: '#FF4646',
         gray01: '#B5B3BF',
         gray02: '#000000',
         gray03: '#000000',
@@ -14,6 +15,7 @@ export const pallets = {
     dark: <Color> {
         base: '#131315',
         main: '#FFFFFF',
+        red: '#FF4646',
         gray01: '#B5B3BF',
         gray02: '#000000',
         gray03: '#000000',

@@ -4,7 +4,7 @@ import { SpotifyAuth } from "spotify/types/auth";
 
 export default async(req: NextApiRequest, res: NextApiResponse) => {
     const code = req.query.code;
-    const redirectUri = 'http://localhost:3000/api/spotify/callback'
+    const redirectUri = 'http://localhost:3000/api/spotify/auth/callback'
     const url = "https://accounts.spotify.com/api/token"
     const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -29,7 +29,9 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
     console.log(auth)
 
     if (auth.refresh_token) {
-        setCookie(res, 'spotify-refresh-token', auth.refresh_token)
+        const expires = new Date()
+        expires.setDate(expires.getDate() + 14)
+        setCookie(res, 'spotify-refresh-token', auth.refresh_token, expires)
     }
     
     res.status(200).redirect("/play");
