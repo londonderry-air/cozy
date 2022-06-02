@@ -26,7 +26,7 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
         expires_in: resData.expires_in,
         refresh_token: resData.refresh_token,
     }
-    console.log(auth)
+    // console.log(auth)
 
     if (auth.refresh_token) {
         const expires = new Date()

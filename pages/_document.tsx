@@ -20,14 +20,15 @@ export default class MyDocument extends Document {
         })
 
       const initialProps = await Document.getInitialProps(ctx)
+      const styles = (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      )
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        styles: styles as any
       }
     } finally {
       sheet.seal()

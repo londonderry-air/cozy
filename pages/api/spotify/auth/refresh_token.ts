@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             params.append(key, data[key as keyof ReqData])
         })
 
-        console.log(params)
+        // console.log(params)
         //console.log(headers)
 
         const result = await fetch(url, {
