@@ -1,6 +1,7 @@
 export type Color = {
     base: string
     main: string
+    red: string
     gray01: string
     gray02: string
     gray03: string

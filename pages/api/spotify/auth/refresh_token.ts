@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             params.append(key, data[key as keyof ReqData])
         })
 
-        console.log(params)
+        // console.log(params)
         //console.log(headers)
 
         const result = await fetch(url, {
@@ -34,7 +34,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             expires_in: resData.expires_in,
         }
         if (auth.access_token) {
-            setCookie(res, 'spotify-access-token', auth.access_token)
+            const expires = new Date()
+            expires.setSeconds(expires.getSeconds() + 3600)
+            setCookie(res, 'spotify-access-token', auth.access_token, expires)
         }
         res.status(200).json(auth)
     }

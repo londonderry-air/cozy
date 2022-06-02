@@ -3,12 +3,14 @@ import { FlexBox } from "shared/elements/box/flex"
 import { Image } from "shared/elements/image/image"
 import { Word } from "shared/elements/text/common"
 import { useTheme } from "shared/hooks/useTheme"
+import { useSpotifyUser } from "spotify/hooks/useSpotifyUser"
 
 export const SpotifyLoginButton = () => {
-    const isLogin = false 
     const {theme} = useTheme()
+    const user = useSpotifyUser()
+    console.log(user)
     return (
-        <Link href={'/api/spotify/login'}>
+        <Link href={'/api/spotify/auth/login'}>
             <FlexBox 
                 way={'row'}
                 gap={'0.8em'}
@@ -16,7 +18,7 @@ export const SpotifyLoginButton = () => {
                 height={'50px'}
                 radius={'25px'}
                 padding={"1em 1.5em"}
-                background={isLogin ? theme.color.main : theme.color.gray01}
+                background={user ? theme.color.main : theme.color.gray01}
                 alignItems={'center'}
             >
                 <Image 
@@ -25,7 +27,7 @@ export const SpotifyLoginButton = () => {
                     fit={'cover'}
                     src={'/images/spotify/spotify_white.png'}
                 />
-                <Word size={'0.9em'} weight={'bold'} color={theme.color.base}>{isLogin ? '接続済み' : '未接続'}</Word>
+                <Word size={'0.9em'} weight={'bold'} color={theme.color.base}>{user ? '接続済み' : '未接続'}</Word>
             </FlexBox>
         </Link>
     )
