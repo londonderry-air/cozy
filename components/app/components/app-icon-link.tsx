@@ -2,7 +2,7 @@ import Link from "next/link"
 import styled from "styled-components"
 import { useRouter } from "next/router"
 import { Box } from "shared/elements/box/common"
-import { Image } from "shared/elements/image/image"
+import { Image } from "shared/elements/image/common"
 import { useTheme } from "shared/hooks/useTheme"
 
 export const AppIconLink = (props: {

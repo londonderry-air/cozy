@@ -1,8 +1,8 @@
 import { Box } from "shared/elements/box/common"
 import { FlexBox } from "shared/elements/box/flex"
 import { useTheme } from "shared/hooks/useTheme"
-import { SpotifyLoginButton } from "spotify/elements/login-button"
-import { SpotifyProfileImage } from "spotify/elements/profile-image"
+import { SpotifyLoginButton } from "spotify/elements/spotify-login-button"
+import { SpotifyProfileImage } from "spotify/elements/spotify-profile-image"
 import styled from "styled-components"
 
 export const AppHeader = () => {

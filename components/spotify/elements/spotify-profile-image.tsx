@@ -1,5 +1,5 @@
 import { Box } from "shared/elements/box/common"
-import { Image } from "shared/elements/image/image"
+import { Image } from "shared/elements/image/common"
 import { useSpotifyUser } from "spotify/hooks/useSpotifyUser"
 
 export const SpotifyProfileImage = () => {
