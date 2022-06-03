@@ -24,9 +24,8 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
             headers: headers,
             body: JSON.stringify({ context_uri: contextUri })
         })
-        console.log(JSON.stringify({ context_uri: contextUri }))
 
-        if (result.status === 204) {
+        if (result.status === 202) {
             return res.status(200)
         } else {
             const error = await result.json()
