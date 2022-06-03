@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react"
 import { useRecoilState } from "recoil"
 import { spotifyPlayerState } from "spotify/states/player"
-import { SpotifyAuth } from "spotify/types/auth"
 import { SpotifyPlayerRepeatState } from "spotify/types/player"
-
-// For playing in chrome, you need to allow autoplay
-// https://qiita.com/AAA0125/items/40020f7ef30a4e3b6d79
+import { refreshSpotifyAccessToken } from "spotify/utils/token"
 
 export const useSpotifyPlayer = () => {
 
     const [player, setPlayer] = useRecoilState(spotifyPlayerState)
+    const deviceIdRef = useRef<string | null>(null)
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -20,7 +18,7 @@ export const useSpotifyPlayer = () => {
             const newPlayer = new window.Spotify.Player({
               name: 'COZY',
               getOAuthToken: async (callback) => {
-                const newToken = await getToken()
+                const newToken = await refreshSpotifyAccessToken()
                 if (newToken) {
                   callback(newToken)
                 }
@@ -29,16 +27,16 @@ export const useSpotifyPlayer = () => {
             });
       
             newPlayer.addListener("ready", ({ device_id }) => {
-                console.log("Ready with Device for COZY: ", device_id);
+                // console.log("Ready with Device for COZY: ", device_id);
+                deviceIdRef.current = device_id
                 setPlayer({...player, deviceId: device_id})
-                console.log({...player, deviceId: device_id})
             });
       
             newPlayer.addListener('player_state_changed', (state: Spotify.PlaybackState) => {
-              console.log(state)
               if (state) {
                 setPlayer({...player, 
                     player: newPlayer,
+                    deviceId: deviceIdRef.current,
                     track: state.track_window.current_track,
                     playlist: state.context ?? null,
                     isPaused: state.paused,
@@ -60,16 +58,6 @@ export const useSpotifyPlayer = () => {
     }, [])
 
     return player
-}
-
-
-const getToken = async () => {
-    const url = "/api/spotify/auth/refresh_token"
-    const res = await fetch(url, { 
-      method: "GET",
-    })
-    const auth: SpotifyAuth = await res.json()
-    return auth.access_token
 }
 
 const getRepeatState = (state: number): SpotifyPlayerRepeatState => {
