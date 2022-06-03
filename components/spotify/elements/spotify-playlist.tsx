@@ -31,6 +31,7 @@ export const SpotifyPlaylist = (props: {
             height={isMobile ? 'calc(100vh - 40px)' : '100vh'} 
             padding={isMobile ? '0' : '2em 4em 1em 2em'} 
             radius={'20px'}
+            overflow={{x: 'hidden'}}
         >
             <PlaylistHeader
                 width={'100%'}
@@ -68,18 +69,22 @@ const PlaylistContainer = styled(FlexBox)<{isOpen: boolean}>`
     transition: 0.5s;
     transition-timing-function: cubic-bezier(.42,0,.58,1);
     top: 0;
-    right: ${props => props.isOpen ? '-2em' : '-100%'};
+    right: 0;
     filter: drop-shadow(-14px 0px 16px rgba(108,108,114,0.6));
+    transform: translateX(${props => props.isOpen ? '2em' : '100%'});
 
     @media (max-width: 600px) {
         transition: 0.3s;
-        top: ${props => props.isOpen ? '40px' : '100vh'};
+        top: 0;
+        transform: translateY(${props => props.isOpen ? '40px' : '100vh'});
         right: 0;
+        pointer-events: ${props => props.isOpen ? 'all' : 'none'};
     }
 `
 
 const PlaylistHeader = styled(FlexBox)`
     filter: drop-shadow(0px 2px 7px rgba(244,244,244,0.6));
+    transform: translateZ(0);
 `
 
 const CancelBox = styled(Box)`
