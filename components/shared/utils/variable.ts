@@ -1,0 +1,1 @@
+export const COZY_ISDEVELOP = process.env.NEXT_PUBLIC_COZY_ISDEVELOP

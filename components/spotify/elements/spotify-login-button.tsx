@@ -8,7 +8,7 @@ import { useSpotifyUser } from "spotify/hooks/useSpotifyUser"
 export const SpotifyLoginButton = () => {
     const {theme} = useTheme()
     const user = useSpotifyUser()
-    console.log(user)
+
     return (
         <Link href={'/api/spotify/auth/login'}>
             <FlexBox 
