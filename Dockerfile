@@ -1,4 +1,6 @@
+# reference: https://zenn.dev/waddy/articles/nextjs-terraform-cloud-run
 # reference: https://github.com/vercel/next.js/discussions/16995
+
 FROM node:16 AS builder
 
 ARG graphql_endpoint
@@ -25,6 +27,8 @@ WORKDIR /app
 COPY package.json ./
 
 RUN npm install
+COPY --from=builder /app/next-env.d.ts ./
+COPY --from=builder /app/tsconfig.json ./
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
