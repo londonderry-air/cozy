@@ -11,7 +11,7 @@ ENV NODE_ENV=development
 # environment variables
 ENV SPOTIFY_CLIENT_ID=$spotify_client_id
 ENV SPOTIFY_SECRET_ID=$spotify_secret_id
-ENV NEXT_PUBLIC_COZY_ISDEVELOP=$cozy_isdevelop
+ENV NEXT_PUBLIC_COZY_ISDEVELOP=true
 
 WORKDIR /app
 COPY package.json ./
