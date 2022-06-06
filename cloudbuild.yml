@@ -6,7 +6,6 @@ steps:
         - -c
         - >-
           docker build
-          --file=Dockerfile
           --build-arg=spotify_client_id=$$SPOTIFY_CLIENT_ID
           --build-arg=spotify_secret_id=$$SPOTIFY_SECRET_ID
           --build-arg=cozy_develop=$$COZY_ISDEVELOP
@@ -15,14 +14,14 @@ steps:
           --cache-from=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
           .
     secretEnv: ["SPOTIFY_CLIENT_ID", "SPOTIFY_SECRET_ID", "COZY_ISDEVELOP"]
-    dir: "cozy-dev"
+    dir: "cozy"
   - id: push-cozy-image
     name: "docker"
     args:
       - push
       - --all-tags
       - $_ARTIFACT_REPOSITORY_IMAGE_NAME
-    dir: "cozy-dev"
+    dir: "cozy"
     waitFor: ["build-cozy"]
   - id: deploy-frontend
     name: gcr.io/cloud-builders/gcloud
