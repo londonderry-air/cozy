@@ -32,4 +32,4 @@ COPY --from=builder /app/tsconfig.json ./
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-CMD ["npm", "run start"]
+CMD ["node_modules/.bin/next", "start"]
