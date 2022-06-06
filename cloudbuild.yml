@@ -27,7 +27,6 @@ steps:
   - id: deploy-frontend
     name: gcr.io/cloud-builders/gcloud
     args:
-      - beta
       - run
       - deploy
       - cozy-dev
