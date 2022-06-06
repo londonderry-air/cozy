@@ -56,7 +56,7 @@ steps:
 timeout: 2000s
 substitutions:
   _REGION: "us-central1"
-  _ARTIFACT_REPOSITORY_IMAGE_NAME: "cozy-dev-image"
+  _ARTIFACT_REPOSITORY_IMAGE_NAME: "us-central1-docker.pkg.dev/$PROJECT_ID/cozy/src"
   _SERVICE_ACCOUNT: google_service_account.cozy_dev_20220606.email
 availableSecrets:
   secretManager:
