@@ -5,7 +5,7 @@ steps:
     args:
         - -c
         - >-
-          find Dockerfile
+          ls
     secretEnv: ["SPOTIFY_CLIENT_ID", "SPOTIFY_SECRET_ID", "COZY_ISDEVELOP"]
     dir: "cozy"
   - id: push-cozy-image
