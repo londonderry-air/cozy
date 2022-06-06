@@ -17,7 +17,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . .
-RUN npm build
+RUN npm run build
 
 
 FROM node:16-stretch-slim AS runner
@@ -32,4 +32,4 @@ COPY --from=builder /app/tsconfig.json ./
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-CMD ["npm", "start"]
+CMD ["npm", "run start"]
