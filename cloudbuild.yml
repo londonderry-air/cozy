@@ -10,7 +10,7 @@ steps:
           --file=Dockerfile
           --build-arg=spotify_client_id=$$SPOTIFY_CLIENT_ID
           --build-arg=spotify_secret_id=$$SPOTIFY_SECRET_ID
-          --build-arg=cozy_develop=$$COZY_ISDEVELOP
+          --build-arg=cozy_isdevelop=$$COZY_ISDEVELOP
           --tag=$_ARTIFACT_REPOSITORY_IMAGE_NAME:$SHORT_SHA
           --tag=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
           --cache-from=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
