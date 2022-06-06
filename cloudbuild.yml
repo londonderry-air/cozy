@@ -5,14 +5,7 @@ steps:
     args:
         - -c
         - >-
-          docker build
-          --build-arg=spotify_client_id=$$SPOTIFY_CLIENT_ID
-          --build-arg=spotify_secret_id=$$SPOTIFY_SECRET_ID
-          --build-arg=cozy_develop=$$COZY_ISDEVELOP
-          --tag=$_ARTIFACT_REPOSITORY_IMAGE_NAME:$SHORT_SHA
-          --tag=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
-          --cache-from=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
-          .
+          find Dockerfile
     secretEnv: ["SPOTIFY_CLIENT_ID", "SPOTIFY_SECRET_ID", "COZY_ISDEVELOP"]
     dir: "cozy"
   - id: push-cozy-image
