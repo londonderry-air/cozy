@@ -21,7 +21,7 @@ steps:
     args:
       - push
       - --all-tags
-      - $_ARTIFACT_REPOSITORY_IMAGE_NAME
+      - asia.gcr.io/$PROJECT_ID/$_ARTIFACT_REPOSITORY_IMAGE_NAME
     dir: "./"
     waitFor: ["build-cozy"]
   - id: deploy-frontend
@@ -56,7 +56,7 @@ steps:
 timeout: 2000s
 substitutions:
   _REGION: "us-central1"
-  _ARTIFACT_REPOSITORY_IMAGE_NAME: "asia.gcr.io/$PROJECT_ID/cozy_dev_image"
+  _ARTIFACT_REPOSITORY_IMAGE_NAME: "cozy_dev_image"
   _SERVICE_ACCOUNT: google_service_account.cozy_dev_20220606.email
 availableSecrets:
   secretManager:
