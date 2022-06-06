@@ -6,7 +6,7 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
     const code = req.query.code;
     const redirectUri = process.env.NODE_ENV === 'development' 
         ? 'http://localhost:3000/api/spotify/auth/callback'
-        : 'https://cozy-spotify-player.vercel.app/api/spotify/auth/callback'
+        : 'https://cozy-klp2qgkoja-an.a.run.app/api/spotify/auth/callback'
     const url = "https://accounts.spotify.com/api/token"
     const headers = {
         "Content-Type": "application/x-www-form-urlencoded",

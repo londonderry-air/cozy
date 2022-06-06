@@ -5,7 +5,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const scope = 'user-modify-playback-state playlist-read-collaborative playlist-read-private user-read-playback-state streaming user-read-email user-read-private'
     const redirectUri = process.env.NODE_ENV === 'development' 
         ? 'http://localhost:3000/api/spotify/auth/callback'
-        : 'https://cozy-spotify-player.vercel.app/api/spotify/auth/callback'
+        : 'https://cozy-klp2qgkoja-an.a.run.app/api/spotify/auth/callback'
     const state = randomStr()
 
     const query = new URLSearchParams({
