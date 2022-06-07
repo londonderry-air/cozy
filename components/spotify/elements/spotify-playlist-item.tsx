@@ -6,22 +6,18 @@ import { useTheme } from "shared/hooks/useTheme"
 import { EllipseWord } from "shared/elements/text/ellipse"
 import { useRecoilValue } from "recoil"
 import { spotifyPlayerState } from "spotify/states/player"
+import { useEffect } from "react"
 
 export const SpotifyPlaylistItem = (props: {playlist: SpotifyApi.PlaylistObjectFull}) => {
     const { theme } = useTheme()
     const { player, deviceId, isPaused } = useRecoilValue(spotifyPlayerState)
+
     return (
         <FlexBox width={'100%'} way={'row'} gap={'20px'} alignItems={'center'}
             onClick={() => {
-                console.log('Start Response')
                 fetch(`/api/spotify/play?device_id=${deviceId}&context_uri=${props.playlist.uri}`)
                     .then((res) => {
-                        // toggle player for iOS device
-                        // iOS device cant play song without using "Spotify.Player.togglePlay()"
-                        console.log('Got Response')
-                        if (player && isPaused) {
-                            player.togglePlay()
-                        }
+                        console.log(player)
                     })
                     .catch((err) => console.log(err))
             }}

@@ -20,22 +20,29 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
             'Authorization': `Bearer ${accessToken}`
         }
 
-        fetch(url, {
+        const result = await fetch(url, {
             method: 'PUT',
             headers: headers,
             body: JSON.stringify({ context_uri: contextUri }),
         })
 
-        return res.status(200).json({
-            status: 'success',
-            deviceId: deviceId,
-            context_uri: contextUri
-        })
-    } catch (err: any) {
-        console.log(err)
-        if (err.name === 'AbortError') {
-            return res.status(200)
+        if (result.status === 202) {
+            return res.status(200).json({
+                status: 'success',
+                deviceId: deviceId,
+                context_uri: contextUri
+            })
+        } else {
+            const error = await result.json()
+            return res.status(result.status).json({
+                status: 'failed',
+                error: error
+            })
         }
-        return res.status(400).json(err)
+    } catch (err: any) {
+        return res.status(400).json({
+            status: 'failed',
+            error: err
+        })
     }
 }
