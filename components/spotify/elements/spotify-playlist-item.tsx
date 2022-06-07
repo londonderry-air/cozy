@@ -9,13 +9,17 @@ import { spotifyPlayerState } from "spotify/states/player"
 
 export const SpotifyPlaylistItem = (props: {playlist: SpotifyApi.PlaylistObjectFull}) => {
     const { theme } = useTheme()
-    const { player, deviceId } = useRecoilValue(spotifyPlayerState)
+    const { player, deviceId, isPaused } = useRecoilValue(spotifyPlayerState)
     return (
         <FlexBox width={'100%'} way={'row'} gap={'20px'} alignItems={'center'}
             onClick={() => {
                 fetch(`/api/spotify/play?device_id=${deviceId}&context_uri=${props.playlist.uri}`)
                     .then((res) => {
-                        res.json().then(d => console.log(d))
+                        // toggle player for iOS device
+                        // iOS device cant play song without using "Spotify.Player.togglePlay()"
+                        if (player && isPaused) {
+                            player.togglePlay()
+                        }
                     })
                     .catch((err) => console.log(err))
             }}
