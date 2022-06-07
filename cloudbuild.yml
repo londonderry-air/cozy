@@ -14,7 +14,7 @@ steps:
           --tag=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
           --cache-from=$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest
           .
-    secretEnv: ["SPOTIFY_CLIENT_ID", "SPOTIFY_SECRET_ID", "COZY_ISDEVELOP"]
+    secretEnv: ["SPOTIFY_CLIENT_ID", "SPOTIFY_SECRET_ID"]
     dir: "./"
   - id: push-cozy-image
     name: "docker"
