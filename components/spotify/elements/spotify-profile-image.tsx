@@ -1,5 +1,5 @@
 import { Box } from "shared/elements/box/common"
-import { Image } from "shared/elements/image/image"
+import { Image } from "shared/elements/image/common"
 import { useSpotifyUser } from "spotify/hooks/useSpotifyUser"
 
 export const SpotifyProfileImage = () => {
@@ -7,14 +7,14 @@ export const SpotifyProfileImage = () => {
     return (
         user ? (
             <Box 
-                width={'48px'} 
-                height={'48px'} 
+                width={'45px'} 
+                height={'45px'} 
                 radius={'24px'} 
                 overflow={{x: 'hidden', y: 'hidden'}}
             >
                 <Image 
-                    width={'48px'} 
-                    height={'48px'} 
+                    width={'45px'} 
+                    height={'45px'} 
                     fit={'cover'} 
                     src={user.images ? user.images[0].url : '/images/spotify/spotify_white.png'} 
                 />

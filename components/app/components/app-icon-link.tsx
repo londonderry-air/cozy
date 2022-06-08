@@ -2,19 +2,20 @@ import Link from "next/link"
 import styled from "styled-components"
 import { useRouter } from "next/router"
 import { Box } from "shared/elements/box/common"
-import { Image } from "shared/elements/image/image"
+import { Image } from "shared/elements/image/common"
 import { useTheme } from "shared/hooks/useTheme"
 
 export const AppIconLink = (props: {
-    name: string,
+    width?: string,
+    height?: string,
+    href: string,
     icon: string,
-    isActive: boolean
 }) => {
     const router = useRouter()
-    const isVisible = router.pathname === `/${props.name}`
+    const isVisible = router.pathname === `${props.href}`
     const {theme} = useTheme()
     return (
-        <Link href={`/${props.name.toLocaleLowerCase()}`}>
+        <Link href={`${props.href.toLocaleLowerCase()}`}>
             <LinkBox 
                 isVisible={isVisible} 
                 color={theme.color.main} 
@@ -24,8 +25,8 @@ export const AppIconLink = (props: {
                 opacity={isVisible ? '1' : '0.3'}
             >
                 <Image
-                    width={'30px'}
-                    height={'30px'}
+                    width={props.width ?? '30px'}
+                    height={props.height ?? '30px'}
                     fit={'cover'}
                     src={props.icon}
                 />
@@ -36,4 +37,10 @@ export const AppIconLink = (props: {
 
 const LinkBox = styled(Box)<{isVisible: boolean, color: string}>`
     border: solid 3px ${props => props.isVisible ? props.color : 'transparent'};
+
+    @media (max-width: 600px) {
+        padding: 0;
+        border-radius: 0;
+        opacity: 1;
+    }
 `

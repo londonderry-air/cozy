@@ -5,6 +5,7 @@ import { SpotifyAuth } from 'spotify/types/auth'
 
 const Home: NextPage = () => {
   const playerName = "COZY"
+  const [deviceId, setDeviceId] = useState<string | null>(null)
   const router = useRouter()
 
   const getToken = async () => {
@@ -42,6 +43,19 @@ const Home: NextPage = () => {
 
       player.addListener("ready", ({ device_id }) => {
         console.log("Ready with Device for COZY: ", device_id);
+        setDeviceId(device_id)
+      });
+
+      player.on('initialization_error', ({ message }) => {
+        console.error('Failed to initialize', message);
+      });
+
+      player.on('authentication_error', ({ message }) => {
+        console.error('Failed to authenticate', message);
+      });
+
+      player.on('playback_error', ({ message }) => {
+        console.error('Failed to perform playback', message);
       });
 
       // player.addListener('player_state_changed', (state: Spotify.PlaybackState) => {

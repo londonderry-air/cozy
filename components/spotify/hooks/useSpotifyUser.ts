@@ -8,11 +8,13 @@ export const useSpotifyUser = () => {
             method: 'GET'
         })
         const data = await res.json()
-        setUser(data)
+        setUser(res.status === 200 ? data : null)
     }, [])
 
     useEffect(() => {
-        setNewUser()
+        if (!user) {
+            setNewUser()
+        }
     }, [])
 
     return user

@@ -1,5 +1,6 @@
 import { CookieSerializeOptions, serialize } from "cookie";
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
+import { refreshSpotifyAccessToken } from "spotify/utils/token";
 
 export const setCookie = (
     res: NextApiResponse,
@@ -19,3 +20,18 @@ export const setCookie = (
   
     res.setHeader("Set-Cookie", serialize(name, stringValue, options));
 };
+
+export const getSpotifyAccessToken = async (req: NextApiRequest) => {
+  if (req.cookies['spotify-access-token']) {
+    return req.cookies['spotify-access-token']
+  }
+
+  if (req.cookies['spotify-refresh-token']) {
+    const newToken = await refreshSpotifyAccessToken()
+    if (newToken) {
+      return newToken
+    }
+  }
+
+  return null
+}

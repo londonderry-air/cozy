@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { FlexBox } from "shared/elements/box/flex"
-import { Image } from "shared/elements/image/image"
+import { Image } from "shared/elements/image/common"
 import { Word } from "shared/elements/text/common"
 import { useTheme } from "shared/hooks/useTheme"
 import { useSpotifyUser } from "spotify/hooks/useSpotifyUser"
@@ -8,7 +8,7 @@ import { useSpotifyUser } from "spotify/hooks/useSpotifyUser"
 export const SpotifyLoginButton = () => {
     const {theme} = useTheme()
     const user = useSpotifyUser()
-    console.log(user)
+
     return (
         <Link href={'/api/spotify/auth/login'}>
             <FlexBox 
