@@ -5,7 +5,7 @@ export const cozyList: Cozy[] = [
     {
         id: '1',
         name: 'Sample',
-        description: 'COZY のサンプルオーディオです。',
+        description: `CAFE では周りの人の話し声や、豆を挽いている音を体験することが\nできます。`,
         sounds: cozySounds
     }
 ]
