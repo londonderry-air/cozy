@@ -11,9 +11,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <AppBox>
         <AppHeader/>
-        <FlexBox way={'row'} grow={'9999'}>
+        <FlexBox way={'row'} width={'100%'} grow={'9999'}>
           <AppMenu />
-          <FlexBox height={'100%'} way={'column'} grow={'9999'}>
+          <FlexBox width={'100%'} height={'100%'} way={'column'} grow={'9999'}>
             <Component {...pageProps} />
           </FlexBox>
         </FlexBox>

@@ -66,7 +66,7 @@ export const SpotifyPlaylist = (props: {
 }
 
 const PlaylistContainer = styled(FlexBox)<{isOpen: boolean}>`
-    transition: 0.5s;
+    transition: 0.3s;
     transition-timing-function: cubic-bezier(.42,0,.58,1);
     top: 0;
     right: 0;

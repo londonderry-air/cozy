@@ -12,7 +12,9 @@ export const useSpotifyUser = () => {
     }, [])
 
     useEffect(() => {
-        setNewUser()
+        if (!user) {
+            setNewUser()
+        }
     }, [])
 
     return user
