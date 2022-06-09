@@ -6,18 +6,22 @@ import { useTheme } from "shared/hooks/useTheme"
 import { EllipseWord } from "shared/elements/text/ellipse"
 import { useRecoilValue } from "recoil"
 import { spotifyPlayerState } from "spotify/states/player"
-import { useEffect } from "react"
 
-export const SpotifyPlaylistItem = (props: {playlist: SpotifyApi.PlaylistObjectFull}) => {
+export const SpotifyPlaylistItem = (props: {
+    playlist: SpotifyApi.PlaylistObjectFull,
+    onSelect?: (playlist: SpotifyApi.PlaylistObjectFull) => void
+}) => {
     const { theme } = useTheme()
     const { player, deviceId, isPaused } = useRecoilValue(spotifyPlayerState)
 
     return (
-        <FlexBox width={'100%'} way={'row'} gap={'20px'} alignItems={'center'}
+        <FlexBox width={'100%'} way={'row'} gap={'20px'} alignItems={'center'} cursor={'pointer'}
             onClick={() => {
                 fetch(`/api/spotify/play?device_id=${deviceId}&context_uri=${props.playlist.uri}`)
                     .then((res) => {
-                        console.log(player)
+                        if (props.onSelect) {
+                            props.onSelect(props.playlist)
+                        }
                     })
                     .catch((err) => console.log(err))
             }}

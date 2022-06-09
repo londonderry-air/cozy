@@ -67,6 +67,7 @@ export const CozySoundButton = (props: {
                 height={'80px'}
                 radius={'40px'}
                 position={'absolute'}
+                cursor={isChangingVolume ? 'grabbing' : audio.isPaused ? 'pointer' : 'grab'}
                 onDrag={(e) => {
                     onChangeVolume(e)
                 }}
@@ -145,7 +146,6 @@ const SoundButtonBox = styled(Box)<{
     isPaused: boolean,
     isChangingVolume: boolean
 }>`
-    cursor: pointer;
     transition: 0.26s;
     will-change: opacity;
     opacity: ${props => props.isPaused ? 0.36 : 1};

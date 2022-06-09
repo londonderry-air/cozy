@@ -20,6 +20,7 @@ export const SpotifyLoginButton = () => {
                 padding={"1em 1.5em"}
                 background={user ? theme.color.main : theme.color.gray01}
                 alignItems={'center'}
+                cursor={'pointer'}
             >
                 <Image 
                     width={'26px'}

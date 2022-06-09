@@ -22,6 +22,7 @@ export const Box = styled.div<{
   pointerEvents?: NonNullable<
     JSX.IntrinsicElements['div']['style']
   >['pointerEvents']
+  cursor?: string
 }>`
   ${(props) =>
     props.background ? `background-color: ${props.background};` : ''}
@@ -38,6 +39,7 @@ export const Box = styled.div<{
   ${(props) => (props.minHeight ? `min-height: ${props.minHeight};` : '')}
   ${(props) => (props.maxWidth ? `max-width: ${props.maxWidth};` : '')}
   ${(props) => (props.maxHeight ? `max-height: ${props.maxHeight};` : '')}
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : '')}
   ${(props) =>
     props.pointerEvents ? `pointer-events: ${props.pointerEvents};` : ''}
   ${(props) =>
