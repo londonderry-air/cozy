@@ -5,7 +5,7 @@ import { Box } from "shared/elements/box/common"
 import { CozyView } from "cozy/elements/cozy"
 import { Word } from "shared/elements/text/common"
 import { COZY_ISDEVELOP } from "shared/utils/variable"
-import { SpotifyPlaylist } from "spotify/elements/spotify-playlist"
+import { SpotifyPlaylistSelector } from "spotify/elements/spotify-playlist-selector"
 import { useSpotifyPlayer } from "spotify/hooks/useSpotifyPlayer"
 
 export default () => {
@@ -27,7 +27,7 @@ export default () => {
         <>
             <CozyView cozy={cozyList[0]} />
 
-            <SpotifyPlaylist isOpen={isOpen} onClose={() =>  setOpenState(false)} />
+            <SpotifyPlaylistSelector isOpen={isOpen} onClose={() =>  setOpenState(false)} />
         </>
     )
 }
