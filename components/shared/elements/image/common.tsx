@@ -11,7 +11,7 @@ export const Image = styled.div<{
   cursor?: string
 }>`
   width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  padding-top: ${(props) => props.height};
   ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : '')}
   overflow: hidden;

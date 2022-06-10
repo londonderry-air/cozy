@@ -35,9 +35,9 @@ export const SpotifyPlaylist = () => {
                             fit={'cover'}
                             src={playlist 
                                 ? playlist.images.length === 0 
-                                    ? '/images/spotify/spotify_white.png' 
+                                    ? '/images/spotify/spotify-playlist-empty.png' 
                                     : playlist.images[0].url
-                                : '/images/spotify/spotify_white.png' 
+                                : '/images/spotify/spotify-playlist-empty.png' 
                             }
                         />
                         </Box>
