@@ -1,4 +1,5 @@
 import { CozySound } from "cozy/types/sound"
+import { useEffect } from "react"
 import { FlexBox } from "shared/elements/box/flex"
 import { useTheme } from "shared/hooks/useTheme"
 import styled from "styled-components"
@@ -16,6 +17,26 @@ export const CozySoundPanel = (props: {
             ? props.sounds.slice(3, props.sounds.length - 1)
             : []
     const { theme } = useTheme()
+    const soundIdList = props.sounds.map(sound => sound.id)
+
+    // use only mobile device
+    const onStopScrollWhenChangeVolume = (e: TouchEvent) => {
+        if (soundIdList.includes((e.target as Element).id)) {
+            // stop scroll
+            e.preventDefault()
+        } else {
+            e.stopPropagation();
+        }
+    }
+
+    // for mobile
+    useEffect(() => {
+        window.addEventListener('touchmove', onStopScrollWhenChangeVolume, {passive: false})
+        return (() => {
+            window.removeEventListener('touchmove', onStopScrollWhenChangeVolume)
+        })
+    }, [])
+
     return (
         <PanelBox 
             width={'100%'}

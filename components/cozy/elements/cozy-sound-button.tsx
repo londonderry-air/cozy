@@ -16,6 +16,7 @@ export const CozySoundButton = (props: {
     const [isChangingVolume, setChangingVolumeState] = useState(false)
     const lastVolumeRef = useRef(50)
     const startPosRef = useRef(0)
+    const buttonRef = useRef() as React.MutableRefObject<HTMLDivElement>
     const onChangeVolume = (e: React.DragEvent<HTMLDivElement>) => {
         if (e.clientY === 0 || audio.isPaused) {
             // To solve delay of styling, toggle volume-change-state here
@@ -30,12 +31,42 @@ export const CozySoundButton = (props: {
         setVolume(Math.min(Math.max(newVolume, 0), 100))
     }
 
+    // use only mobile device
+    const onStopScrollWhenChangeVolume = (e: TouchEvent) => {
+        console.log((e.target as Element).id === buttonRef.current.id)
+        console.log((e.target as Element).id)
+        console.log(buttonRef.current.id)
+
+        if (isChangingVolume && (e.target as Element).id === buttonRef.current.id) {
+            // stop scroll
+            e.preventDefault()
+        } else {
+            e.stopPropagation();
+        }
+    }
+
+    const onChangeVolumeWithMobile = (e: React.TouchEvent<HTMLDivElement>) => {
+        if (e.touches[0].clientY === 0 || audio.isPaused) {
+            // To solve delay of styling, toggle volume-change-state here
+            setChangingVolumeState(false)
+            return
+        }
+        const maxTranslation = window.innerHeight * 0.5
+        const amount = (startPosRef.current - e.touches[0].clientY) / maxTranslation * 100
+        const newVolume = lastVolumeRef.current + amount
+
+        // max volume is 100, and minimum volume is 0
+        setChangingVolumeState(true)
+        setVolume(Math.min(Math.max(newVolume, 0), 100))
+    }
+
     useEffect(() => {
         audio.changeVolume(volume / 100)
     }, [volume])
 
     return (
         <SoundButtonBox
+            id={props.sound.id} // set id to prevent scroll on mobile(cozy-sound-panel.tsx: line 23~30)
             width={'80px'} 
             height={'80px'} 
             position={'relative'}
@@ -62,12 +93,14 @@ export const CozySoundButton = (props: {
             </IconBox>
             <Indicator percentage={volume}/>
             <VolumeBox
+                id={props.sound.id}  // set id to prevent scroll on mobile(cozy-sound-panel.tsx: line 23~30)
                 draggable={true}
                 width={'80px'} 
                 height={'80px'}
                 radius={'40px'}
                 position={'absolute'}
                 cursor={isChangingVolume ? 'grabbing' : audio.isPaused ? 'pointer' : 'grab'}
+                ref={buttonRef}
                 onDrag={(e) => {
                     onChangeVolume(e)
                 }}
@@ -79,6 +112,18 @@ export const CozySoundButton = (props: {
                 onDragEnd={() => {
                     // set last volume for adjust volume
                     lastVolumeRef.current = volume
+                }}
+                onTouchMove={(e) => {
+                    onChangeVolumeWithMobile(e)
+                }}
+                onTouchStart={(e) => {
+                    // set start point of drag
+                    startPosRef.current = e.touches[0].clientY
+                }}
+                onTouchEnd={() => {
+                    // set last volume for adjust volume
+                    lastVolumeRef.current = volume
+                    setChangingVolumeState(false)
                 }}
             ></VolumeBox>
         </SoundButtonBox>
@@ -150,6 +195,10 @@ const SoundButtonBox = styled(Box)<{
     will-change: opacity;
     opacity: ${props => props.isPaused ? 0.36 : 1};
     transform: ${props => props.isChangingVolume ? 'scale(1.05)' : 'scale(1.0)'};
+
+    @media (max-width: 600px) {
+        transform: ${props => props.isChangingVolume ? 'scale(1.1)' : 'scale(1.0)'};
+    }
 `
 
 const VolumeBox = styled(Box)`
