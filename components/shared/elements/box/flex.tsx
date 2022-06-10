@@ -7,6 +7,7 @@ export const FlexBox = styled(Box)<{
   alignItems?: string
   justifyContent?: string
   grow?: string
+  shrink?: string
   gap?: string
 }>`
   display: flex;
@@ -16,4 +17,5 @@ export const FlexBox = styled(Box)<{
   justify-content: ${(props) => props.justifyContent ?? 'flex-start'};
   gap: ${(props) => (props.gap ?? '0')};
   flex-grow: ${(props) => props.grow ?? '0'};
+  flex-shrink: ${(props) => props.shrink ?? '1'};
 `
