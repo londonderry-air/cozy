@@ -36,11 +36,13 @@ export const AppIconLink = (props: {
 }
 
 const LinkBox = styled(Box)<{isVisible: boolean, color: string}>`
+    transition: 0.5s;
     border: solid 3px ${props => props.isVisible ? props.color : 'transparent'};
 
     @media (max-width: 600px) {
         padding: 0;
         border-radius: 0;
         opacity: 1;
+        border: solid 0px transparent;
     }
 `

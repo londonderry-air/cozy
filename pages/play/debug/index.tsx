@@ -2,10 +2,10 @@ import { cozyList } from "cozy/utils/variable/cozy"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { Box } from "shared/elements/box/common"
-import { CozyView } from "shared/elements/templates/cozy"
+import { CozyView } from "cozy/elements/cozy"
 import { Word } from "shared/elements/text/common"
 import { COZY_ISDEVELOP } from "shared/utils/variable"
-import { SpotifyPlaylist } from "spotify/elements/spotify-playlist"
+import { SpotifyPlaylistSelector } from "spotify/elements/spotify-playlist-selector"
 import { useSpotifyPlayer } from "spotify/hooks/useSpotifyPlayer"
 
 export default () => {
@@ -26,10 +26,8 @@ export default () => {
     return (
         <>
             <CozyView cozy={cozyList[0]} />
-            <Box padding={'1em 2em'} background={"#212121"} radius={'30px'}>
-                <Word color={"#FFFFFF"} weight={'600'} onClick={() => setOpenState(true)}>open playlist</Word>
-            </Box>
-            <SpotifyPlaylist isOpen={isOpen} onClose={() =>  setOpenState(false)} />
+
+            <SpotifyPlaylistSelector isOpen={isOpen} onClose={() =>  setOpenState(false)} />
         </>
     )
 }

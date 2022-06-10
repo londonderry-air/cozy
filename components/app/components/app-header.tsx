@@ -15,10 +15,13 @@ export const AppHeader = () => {
         <HeaderBox background={theme.color.base} width="100%" padding={isMobile ? '1em 10px' : '1em 2em'}>
             <FlexBox way={'row'} alignItems={'center'} justifyContent={'space-between'}>
                 <FlexBox way={'row'}></FlexBox>
-                <FlexBox way={'row'} alignItems={'center'} gap={isMobile ? '10px' : '1em'}>
+                <FlexBox way={'row'} alignItems={'center'} gap={isMobile ? '1em' : '1em'}>
                     <SpotifyProfileImage/>
                     {isMobile ? (
-                        <AppIconLink width={'45px'} height={'45px'} href={'/settings'} icon={'/images/cozy/settings.png'}/>
+                        <>
+                            <AppIconLink width={'40px'} height={'40px'} href={'/help'} icon={'/images/cozy/question.png'} />
+                            <AppIconLink width={'40px'} height={'40px'} href={'/settings'} icon={'/images/cozy/settings.png'}/>
+                        </>
                     ) : (
                         <SpotifyLoginButton/>
                     )}

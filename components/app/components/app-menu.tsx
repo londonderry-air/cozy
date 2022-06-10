@@ -11,13 +11,10 @@ export const AppMenu = () => {
         <MenuBox height={'100%'} padding={'2em 1.5em 1em 1.5em'}>
             <FlexBox height={'100%'} way={'column'} justifyContent={'space-between'}>
                 <FlexBox way={'column'} alignItems={'center'} gap={'1em'}>
-                    <AppIconLink href={'/test'} icon={'/images/cafe.png'} />
-                    <AppIconLink href={'/cafe'} icon={'/images/cafe.png'} />
-                    <AppIconLink href={'/cafe'} icon={'/images/cafe.png'} />
-                    <AppIconLink href={'/cafe'} icon={'/images/cafe.png'} />
-                    <AppIconLink href={'/cafe'} icon={'/images/cafe.png'} />
+                    <AppIconLink href={'/play/cafe'} icon={'/images/cafe.png'} />
                 </FlexBox>
                 <FlexBox way={'column'} alignItems={'center'} gap={'1em'}>
+                    <AppIconLink href={'/help'} icon={'/images/cozy/question.png'} />
                     <AppIconLink href={'/settings'} icon={'/images/cozy/settings.png'} />
                 </FlexBox>
             </FlexBox>
