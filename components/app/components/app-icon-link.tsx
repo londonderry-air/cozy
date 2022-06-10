@@ -43,5 +43,6 @@ const LinkBox = styled(Box)<{isVisible: boolean, color: string}>`
         padding: 0;
         border-radius: 0;
         opacity: 1;
+        border: solid 0px transparent;
     }
 `
