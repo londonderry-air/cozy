@@ -64,6 +64,23 @@ export const CozySoundButton = (props: {
         audio.changeVolume(volume / 100)
     }, [volume])
 
+    useEffect(() => {
+        const audioReq = new XMLHttpRequest()
+        audioReq.open("GET", props.sound.src, true);
+        audioReq.responseType = "arraybuffer";
+        audioReq.onload = () => {
+            const context = new AudioContext();
+            const source = context.createBufferSource();
+
+            // オーディオをデコード
+            context.decodeAudioData(audioReq.response, (buf) => {
+                source.buffer = buf;
+                source.loop = false;
+            });
+        }
+        audioReq.send();
+    }, [])
+
     return (
         <SoundButtonBox
             id={props.sound.id} // set id to prevent scroll on mobile(cozy-sound-panel.tsx: line 23~30)
